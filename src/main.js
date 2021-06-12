@@ -1,6 +1,8 @@
+//Client data
 const board = document.getElementById("board");
-const promote_box = document.getElementById("promotebox")
-const game_page = document.getElementById("game_page")
+const promote_box = document.getElementById("promotebox");
+const main_page = document.getElementById("main_page");
+const game_page = document.getElementById("game_page");
 const black_pieces = [];
 const white_pieces = [];
 const potential_moves = [];
@@ -10,6 +12,8 @@ const turn = {
     white: "W",
     none: "N"
 }
+//Server data
+
 var current_turn, selected_highlighter;
 
 function Initialize_board(){
@@ -31,8 +35,8 @@ function Initialize_board(){
 function Initialize_pieces(){
     //Initializing Pawns
     for(var a = 0; a < 8; a++){
-        var new_black_piece = new Pawn(a, 1, "B", 1, "Pieces/BP.png")
-        var new_white_piece = new Pawn(a, 6, "W", -1, "Pieces/WP.png")
+        var new_black_piece = new Pawn(a, 1, "B", 1, "Pieces/BP.png");
+        var new_white_piece = new Pawn(a, 6, "W", -1, "Pieces/WP.png");
         new_white_piece.Initialize();
         new_black_piece.Initialize();
         new_white_piece.Render();
@@ -95,4 +99,15 @@ function NewGame(){
     Initialize_pieces();
 }
 
-NewGame();
+function MainPage(){
+    main_page.setAttribute("enable", "true");
+    game_page.setAttribute("enable", "false");
+    board.setAttribute("enable", "false");
+}
+
+function GamePage(){
+    game_page.setAttribute("enable", "true");
+    main_page.setAttribute("enable","false");
+    board.setAttribute("enable","true");
+    NewGame();
+}

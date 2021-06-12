@@ -163,7 +163,7 @@ function MoveDiagonally(x,y,enemy){
     }
 }
 
-function LegalMove(xi,yi,xo,yo){
+function LegalMove(xi,yi,xo,yo,testing=false){
     var prev_tile = document.getElementById(yi + ',' + xi);
     var next_tile = document.getElementById(yo + ',' + xo);
     var holder = null;

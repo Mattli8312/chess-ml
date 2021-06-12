@@ -7,9 +7,25 @@
     <title>Chess</title>
 </head>
 <body>
-    <div id="game_page">
+    <div id="main_page" enable="true">
+        <div id="title">
+            <h1>Chess</h1>
+            <img src="Pieces/WK.png" alt="#">
+            <img src="Pieces/WQ.png" alt="#">
+            <img src="Pieces/WB.png" alt="#">
+            <img src="Pieces/WKn.png" alt="#">
+            <img src="Pieces/WR.png" alt="#">
+            <img src="Pieces/WP.png" alt="#">
+        </div>
+        <div id="CreateGame" type="button" onclick="GamePage()">CreateGame</div>
+        <div id="LocalGame" type = "button">LocalGame</div>
+        <div id="JoinGame" type="button">JoinGame</div>
+        <input id="join" maxLength="5" type="text" placeholder="enter 5 letter code">
+    </div>
+    <div id="game_page" enable="false">
         <div id="promotebox" enable="false"></div>
-        <div id="board"></div>
+        <div id="back" type="button">Back</div>
+        <div id="board" enable="false"></div>
     </div>
     <script src="Legal.js"></script>
     <script src="Utility.js"></script>

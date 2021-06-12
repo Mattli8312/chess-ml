@@ -1,16 +1,17 @@
 function PawnChecking(x, y, direction,enemy){
     var dir = [-1,1];
+    var result = false;
     for(var a = 0; a < 2; a++){
         var tile = document.getElementById((y+direction) + ',' + (x+dir[a]));
         if(tile && tile.firstChild){
             var src = tile.firstChild.getAttribute("src");
             if(src && src[7] == enemy && src[8] == "K" && src[9] != "n")
-                return true;
+                result =  true;
             else 
-                return false;
+                result =  false;
         }
     }
-    return false;
+    return result;
 }
 
 function DiagonalChecking(x,y,enemy){

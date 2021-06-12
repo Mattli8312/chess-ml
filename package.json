@@ -1,0 +1,20 @@
+{
+  "name": "chess",
+  "version": "1.0.0",
+  "description": "- Based on the iconic game This was built using plain HTML/CSS and Javascript for the front end and Node for the backend.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Mattli8312/chess-ml.git"
+  },
+  "keywords": [],
+  "author": "Matthew Lian",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Mattli8312/chess-ml/issues"
+  },
+  "homepage": "https://github.com/Mattli8312/chess-ml#readme"
+}

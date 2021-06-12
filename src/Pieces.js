@@ -39,6 +39,12 @@ class Piece{
         next_tile.setAttribute("type", "select");
         next_tile.setAttribute("id", p.y + ',' + p.x + ',sel');
         next_tile.addEventListener("click", ()=>{
+            if(this.type == "pawn" && (p.y == 0 || p.y == 7)) {
+                console.log("Promoting");
+                EnablePromote(p, this, current_turn);
+                current_turn = turn.none;
+                return;
+            }
             var new_tile = document.getElementById(p.y + ','  + p.x);
             var checker = document.getElementById(p.y + ',' + (p.x + 1) + ',img');
             var checker2 = document.getElementById(p.y + ',' + (p.x - 1) + ',img');
