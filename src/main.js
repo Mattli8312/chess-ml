@@ -10,6 +10,8 @@ const rapid = document.getElementById("10min");
 const black_clk = document.getElementById("black_clock");
 const white_clk = document.getElementById("white_clock");
 const MoveHistory = document.getElementById("MoveHistory");
+const winnerPage = document.getElementById("winnerPage");
+const winner = document.getElementById("winner");
 //Client data
 const black_pieces = [];
 const white_pieces = [];
@@ -142,17 +144,22 @@ function GamePage(){
 }
 
 function Winner(){
+    var notation = "";
     game_enabled = false;
     switch(current_turn){
         case turn.white_winner:
-            console.log("white wins!");
+            notation = "White Won!"
             break;
         case turn.black_winner:
-            console.log('black wins!');
+            notation = "Black Won!"
             break;
         default:
             alert("Error with receiving winner");
     }
+    setTimeout(()=>{
+        winner.innerHTML = notation;
+        winnerPage.setAttribute("enable", "true");
+    }, 1000)
 }
 
 MasterClock = setInterval(() => {

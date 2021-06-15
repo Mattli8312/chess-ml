@@ -100,6 +100,23 @@
     font-size: 3vw;
 }
 
+#winnerPage{
+    padding: 1em;
+    border-radius: 1vw;
+    position: absolute;
+    background: rgb(50,50,50);
+    flex-direction: column;
+    margin: auto;
+    justify-content: center;
+    align-items: center;
+    font-size: 2em;
+    color: white;
+}
+
+#winner{
+    font-size: 2.5em;
+}
+
 div[type="space"]{
     width: 6vw;
     height: 6vw;

@@ -23,7 +23,6 @@
             <div id="5min" type="button" onclick="NewGame(5)">5 min</div>
             <div id="10min" type="button" onclick="NewGame(10)">10 min</div>
         </div>
-        <div id="LocalGame" type = "button">LocalGame</div>
         <div id="JoinGame" type="button">JoinGame</div>
         <input id="join" maxLength="5" type="text" placeholder="enter 5 letter code">
     </div>
@@ -38,7 +37,10 @@
             </div>
             <div id="white_clock"></div>
         </div>
-        <div id="winnerPage"></div>
+        <div id="winnerPage" enable = "false">
+            <div id="winner"></div>
+            <div id="Rematch" type ="button">Rematch?</div>
+        </div>
     </div>
     <script src="Legal.js"></script>
     <script src="Utility.js"></script>

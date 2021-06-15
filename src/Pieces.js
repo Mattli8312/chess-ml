@@ -36,18 +36,29 @@ class Piece{
     AddMove(p, capture = false){
         var new_move = document.createElement("div");
         var notation = move_counter.toString() + '. ';
+        var checkmate = false;
         new_move.style.color = "white"; new_move.style.fontSize = "1.5em";
-        if(this.type != "pawn") notation += this.type != "knight" ? this.src[8] : 'N';
+        if(this.type != "pawn") 
+            notation += this.type != "knight" ? this.src[8] : 'N';
         if(capture){ 
             if(this.type == "pawn") notation += letter_coords[p.x];
             notation += 'x';
         }
         notation += letter_coords[this.x] + number_coords[this.y]; 
-        if(Checkmate()) notation += "#";
+        if(Checkmate()){
+            notation += "#";
+            checkmate = true;
+        }
         else if(Check()) notation += "+";
+        if(p.castle){
+            notation = move_counter.toString() + '.';
+            if(p.delx < 0) notation += " O-O-O";
+            else notation += " O-O";
+        }
         new_move.innerHTML = notation;
         MoveHistory.appendChild(new_move);
         move_counter ++;
+        return checkmate;
     }
     MoveEventListener(p){
         var next = document.getElementById(p.y + ',' + p.x);
@@ -116,9 +127,9 @@ class Piece{
             current_turn = current_turn == turn.black ? turn.white : turn.black;
             ResetMoves();
             ResetCurrentPlayersPawns(); //For en pasant
-            this.AddMove(p);
-            if(Checkmate()){
+            if(this.AddMove(p)){
                 current_turn = current_turn == turn.white ? turn.black_winner : turn.white_winner;
+                Winner();
             }
         });
         next.appendChild(next_tile);
@@ -139,7 +150,9 @@ class Piece{
             var enemy_color = this.color == "W" ? "black" : "white";
             var prev = {
                 x: this.x,
-                y: this.y
+                y: this.y,
+                new_x: p.x,
+                new_y: p.y
             }
             var tile = CapturePiece(enemy_color, p.x, p.y);
             if(p.ep){ //For en pasant
@@ -151,15 +164,15 @@ class Piece{
                 this.y = p.y;
             }
             this.x = p.x;
-            this.AddMove(prev,true);
             this.img.setAttribute("id", this.y + ',' + this.x + ',img');
             tile.appendChild(this.img);
             current_turn = current_turn == turn.black ? turn.white : turn.black;
             this.castle_enable = false;
             ResetMoves();
             ResetCurrentPlayersPawns(); //For en pasant
-            if(Checkmate()){
+            if(this.AddMove(prev,true)){
                 current_turn = current_turn == turn.black ? turn.white_winner : turn.black_winner;
+                Winner();
             }
         })
     }
