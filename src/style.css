@@ -2,7 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    --main-page-background: #0a0a38;
+    --main-page-background: #003152;
 }
 
 #main_page{
@@ -64,6 +64,40 @@
     width: 48vw;
     height: 48vw;
     background: black;
+}
+
+#RefPage{
+    display: flex;
+    padding: 1em;
+    flex-direction: column;
+    width: 24vw;
+    height: 48vw;
+}
+
+#MoveHistory{
+    background: var(--main-page-background);
+    color: white;
+    width: auto;
+    height: 100%;
+    font-size: 1em;
+    padding: 1em;
+    overflow: scroll;
+}
+
+#black_clock{
+    text-align: center;
+    background-color: black;
+    padding: 0.5em;
+    color: white;
+    font-size: 3vw;
+}
+
+#white_clock{
+    text-align: center;
+    background-color: white;
+    padding: 0.5em;
+    color: black;
+    font-size: 3vw;
 }
 
 div[type="space"]{

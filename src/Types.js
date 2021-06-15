@@ -168,9 +168,6 @@ class King extends Piece{
             if(check != null){
                 var tile = document.getElementById((this.y + dely[a]) + ',' + (this.x + delx[a]) + ',img');
                 if(!LegalMove(this.x,this.y,this.x+delx[a],this.y+dely[a])){
-                    console.log(this.x + delx[a])
-                    console.log(this.y + dely[a])
-                    console.log("not legal")
                     continue;
                 }
                 if(tile == null){

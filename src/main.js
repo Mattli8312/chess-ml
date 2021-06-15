@@ -1,8 +1,16 @@
-//Client data
+//DOM data
 const board = document.getElementById("board");
 const promote_box = document.getElementById("promotebox");
 const main_page = document.getElementById("main_page");
+const creategameMode = document.getElementById("creategameMode");
 const game_page = document.getElementById("game_page");
+const bullet = document.getElementById("3min");
+const blitz = document.getElementById("5min");
+const rapid = document.getElementById("10min");
+const black_clk = document.getElementById("black_clock");
+const white_clk = document.getElementById("white_clock");
+const MoveHistory = document.getElementById("MoveHistory");
+//Client data
 const black_pieces = [];
 const white_pieces = [];
 const potential_moves = [];
@@ -10,11 +18,24 @@ const potential_attacks = [];
 const turn = {
     black: "B",
     white: "W",
+    white_winner: "WW",
+    black_winner: "BW",
     none: "N"
 }
 //Server data
-
+const black_clock = {
+    min: 10,
+    sec: 0
+}
+const white_clock = {
+    min: 10,
+    sec: 0
+}
+var game_enabled, MasterClock;
 var current_turn, selected_highlighter;
+var move_counter;
+var number_coords = ['8','7','6','5','4','3','2','1'];
+var letter_coords = ['a','b','c','d','e','f','g','h'];
 
 function Initialize_board(){
     //First erase all previous tiles
@@ -22,7 +43,7 @@ function Initialize_board(){
         board.removeChild(board.firstChild);
     for(var a = 0; a < 8; a++){
         for(var b = 0; b < 8; b++){
-            var color_ = (a % 2 ? (b % 2 ? "gray" : "white") : (b % 2 ? "white" : "gray"))
+            var color_ = (!(a % 2) ? (b % 2 ? "gray" : "white") : (b % 2 ? "white" : "gray"))
             var tile_ = document.createElement("div");
             tile_.setAttribute("type","space");
             tile_.setAttribute("id", a + ',' + b)
@@ -93,21 +114,66 @@ function Reset_board(){
     selected_highlighter = null;
 }
 
-function NewGame(){
+function NewGame(minutes){
+    game_page.setAttribute("enable", "true");
+    main_page.setAttribute("enable","false");
+    board.setAttribute("enable","true");
+    white_clock.min = black_clock.min = minutes;
+    white_clock.sec = black_clock.sec = 0;
+    move_counter = 1;
+    white_clk.innerHTML = white_clock.sec < 10 ? white_clock.min + ':0' + white_clock.sec : white_clock.min + ':' + white_clock.sec;
+    black_clk.innerHTML = black_clock.sec < 10 ? black_clock.min + ':0' + black_clock.sec : black_clock.min + ':' + black_clock.sec;
     Reset_board();
     Initialize_board();
     Initialize_pieces();
 }
 
 function MainPage(){
+    creategameMode.setAttribute("enable", "false");
     main_page.setAttribute("enable", "true");
     game_page.setAttribute("enable", "false");
     board.setAttribute("enable", "false");
+    game_enabled = false;
 }
 
 function GamePage(){
-    game_page.setAttribute("enable", "true");
-    main_page.setAttribute("enable","false");
-    board.setAttribute("enable","true");
-    NewGame();
+    creategameMode.setAttribute("enable", "true");
+    game_enabled = true;
 }
+
+function Winner(){
+    game_enabled = false;
+    switch(current_turn){
+        case turn.white_winner:
+            console.log("white wins!");
+            break;
+        case turn.black_winner:
+            console.log('black wins!');
+            break;
+        default:
+            alert("Error with receiving winner");
+    }
+}
+
+MasterClock = setInterval(() => {
+    if(game_enabled){
+        switch(current_turn){
+            case turn.black:
+                if(!black_clock.sec) {
+                    black_clock.min--; 
+                    black_clock.sec = 60
+                };
+                black_clock.sec--;
+                black_clk.innerHTML = black_clock.sec < 10 ? black_clock.min + ':0' + black_clock.sec : black_clock.min + ':' + black_clock.sec;
+                break;
+            case turn.white:
+                if(!white_clock.sec) {
+                    white_clock.min--;
+                    white_clock.sec = 60
+                };
+                white_clock.sec--;
+                white_clk.innerHTML = white_clock.sec < 10 ? white_clock.min + ':0' + white_clock.sec : white_clock.min + ':' + white_clock.sec;
+                break;
+        }
+    }
+}, 1000);

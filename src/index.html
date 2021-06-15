@@ -18,14 +18,27 @@
             <img src="Pieces/WP.png" alt="#">
         </div>
         <div id="CreateGame" type="button" onclick="GamePage()">CreateGame</div>
+        <div id="creategameMode" enable="false">
+            <div id="3min" type="button" onclick="NewGame(3)">3 min</div>
+            <div id="5min" type="button" onclick="NewGame(5)">5 min</div>
+            <div id="10min" type="button" onclick="NewGame(10)">10 min</div>
+        </div>
         <div id="LocalGame" type = "button">LocalGame</div>
         <div id="JoinGame" type="button">JoinGame</div>
         <input id="join" maxLength="5" type="text" placeholder="enter 5 letter code">
     </div>
     <div id="game_page" enable="false">
         <div id="promotebox" enable="false"></div>
-        <div id="back" type="button">Back</div>
+        <div id="back" type="button" onclick="MainPage()">Back</div>
         <div id="board" enable="false"></div>
+        <div id="RefPage">
+            <div id="black_clock"></div>
+            <div id="MoveHistory">
+                <h1>Moves:</h1>
+            </div>
+            <div id="white_clock"></div>
+        </div>
+        <div id="winnerPage"></div>
     </div>
     <script src="Legal.js"></script>
     <script src="Utility.js"></script>

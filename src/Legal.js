@@ -7,8 +7,6 @@ function PawnChecking(x, y, direction,enemy){
             var src = tile.firstChild.getAttribute("src");
             if(src && src[7] == enemy && src[8] == "K" && src[9] != "n")
                 result =  true;
-            else 
-                result =  false;
         }
     }
     return result;
@@ -73,15 +71,14 @@ function KnightChecking(x,y, enemy){
 function KingChecking(x,y,enemy){
     var delx = [-1, 0, 1,1,1,0,-1,-1];
     var dely = [-1,-1,-1,0,1,1,1,0];
+    var result = false;
     for(var a = 0; a < 8; a++){
         var tile = document.getElementById((y + dely[a]) + ',' + (x + delx[a]))
         if(tile != null && tile.firstChild != null){
             var src = tile.getAttribute("src");
             if(src && src[7] == enemy && src[8] == "K" && src[9] != "n")
-                return true;
-            else 
-                return false;
+                result = true;
         }
     }
-    return false;
+    return result;
 }

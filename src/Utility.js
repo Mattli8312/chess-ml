@@ -11,7 +11,7 @@ function ResetMoves(){
         var pot = potential_attacks[potential_attacks.length - 1]
         var tile = document.getElementById(pot.y + ',' + pot.x);
         ResetOriginalPieceEventListener(tile,pot.x,pot.y);
-        tile.style.background = (pot.y % 2 ? (pot.x % 2 ? "gray" : "white") : (pot.x % 2 ? "white" : "gray"));
+        tile.style.background = (!(pot.y % 2) ? (pot.x % 2 ? "gray" : "white") : (pot.x % 2 ? "white" : "gray"));
         potential_attacks.pop();
     }
 }
@@ -163,7 +163,7 @@ function MoveDiagonally(x,y,enemy){
     }
 }
 
-function LegalMove(xi,yi,xo,yo,testing=false){
+function LegalMove(xi,yi,xo,yo){
     var prev_tile = document.getElementById(yi + ',' + xi);
     var next_tile = document.getElementById(yo + ',' + xo);
     var holder = null;

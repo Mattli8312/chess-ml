@@ -33,6 +33,20 @@ class Piece{
             }
         })
     }
+    AddMove(p, capture = false){
+        var new_move = document.createElement("div");
+        var notation = move_counter.toString() + '. ';
+        new_move.style.color = "white"; new_move.style.fontSize = "1.5em";
+        if(this.type != "pawn") notation += this.type != "knight" ? this.src[8] : 'N';
+        if(capture){ 
+            if(this.type == "pawn") notation += letter_coords[p.x];
+            notation += 'x';
+        }
+        notation += letter_coords[this.x] + number_coords[this.y]; 
+        new_move.innerHTML = notation;
+        MoveHistory.appendChild(new_move);
+        move_counter ++;
+    }
     MoveEventListener(p){
         var next = document.getElementById(p.y + ',' + p.x);
         var next_tile = document.createElement("div");
@@ -40,7 +54,6 @@ class Piece{
         next_tile.setAttribute("id", p.y + ',' + p.x + ',sel');
         next_tile.addEventListener("click", ()=>{
             if(this.type == "pawn" && (p.y == 0 || p.y == 7)) {
-                console.log("Promoting");
                 EnablePromote(p, this, current_turn);
                 current_turn = turn.none;
                 return;
@@ -101,11 +114,9 @@ class Piece{
             current_turn = current_turn == turn.black ? turn.white : turn.black;
             ResetMoves();
             ResetCurrentPlayersPawns(); //For en pasant
-            if(Checkmate()) current_turn = turn.none;
-            //Promoting Pawns
-            if(this.type == "pawn" && (p.y == 0 || p.y == 7)) {
-                console.log("Promoting");
-                current_turn = turn.none;
+            this.AddMove(p);
+            if(Checkmate()){
+                current_turn = current_turn == turn.white ? turn.black_winner : turn.white_winner;
             }
         });
         next.appendChild(next_tile);
@@ -119,12 +130,15 @@ class Piece{
         //safe guard
         tile.addEventListener("click", ()=>{
             if(this.type == "pawn" && (p.y == 0 || p.y == 7)) {
-                console.log("Promoting");
                 EnablePromote(p, this, current_turn);
                 current_turn = turn.none;
                 return;
             }
             var enemy_color = this.color == "W" ? "black" : "white";
+            var prev = {
+                x: this.x,
+                y: this.y
+            }
             var tile = CapturePiece(enemy_color, p.x, p.y);
             if(p.ep){ //For en pasant
                 tile = document.getElementById((p.y + this.direction) + ',' + p.x);
@@ -135,14 +149,16 @@ class Piece{
                 this.y = p.y;
             }
             this.x = p.x;
+            this.AddMove(prev,true);
             this.img.setAttribute("id", this.y + ',' + this.x + ',img');
             tile.appendChild(this.img);
             current_turn = current_turn == turn.black ? turn.white : turn.black;
             this.castle_enable = false;
             ResetMoves();
             ResetCurrentPlayersPawns(); //For en pasant
-            if(Checkmate()) current_turn = turn.none;
-            //For promoting
+            if(Checkmate()){
+                current_turn = current_turn == turn.black ? turn.white_winner : turn.black_winner;
+            }
         })
     }
 }
