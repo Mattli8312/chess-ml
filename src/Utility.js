@@ -309,6 +309,7 @@ function EnablePromote(p, piece){
     }
     for(const o of options){
         var new_ = document.createElement("img");
+        var notation = move_counter + '. ' + letter_coords[piece.x] + number_coords[p.y];
         new_.setAttribute("src", "Pieces/" + piece.color + o + ".png");
         new_.setAttribute("type", "promotion")
         new_.addEventListener("click", () =>{
@@ -322,15 +323,19 @@ function EnablePromote(p, piece){
             switch(o){
                 case "Q":
                     new_piece = new Queen(p.x, p.y, piece.color, 0, src_);
+                    notation += "=Q";
                     break;
                 case "R":
                     new_piece = new Rook(p.x, p.y, piece.color, 0, src_);
+                    notation += "=R";
                     break;
                 case "Kn":
                     new_piece = new Knight(p.x,p.y,piece.color, 0, src_);
+                    notation += "=N"
                     break;
                 default:
                     new_piece = new Bishop(p.y,p.y,piece.color, 0, src_);
+                    notation += "=B"
                     break;
             }
             new_piece.Initialize();
@@ -357,6 +362,11 @@ function EnablePromote(p, piece){
                     }
                     break;
             }
+            var move = document.createElement("div")
+            move.style.color = "white"; move.style.fontSize = "1.5em";
+            move.innerHTML = notation;
+            MoveHistory.appendChild(move);
+            move_counter ++;
         })
         promote_box.appendChild(new_);
     }
