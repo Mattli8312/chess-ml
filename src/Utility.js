@@ -226,6 +226,29 @@ function LegalMove(xi,yi,xo,yo){
     return result;
 }
 
+function Check(){
+    switch(current_turn){
+        case turn.black:
+            for(const w of white_pieces){
+                if(w.type == "pawn" && PawnChecking(w.x, w.y, w.direction, turn.black)) return true;
+                if(w.type == "rook" && LateralChecking(w.x, w.y, turn.black)) return true;
+                if(w.type == "knight" && KnightChecking(w.x, w.y, turn.black)) return true;
+                if(w.type == "bishop" && DiagonalChecking(w.x, w.y, turn.black)) return true;
+                if(w.type == "queen" && LateralChecking(w.x, w.y, turn.black) || DiagonalChecking(w.x, w.y, turn.black)) return true;
+            }
+            return false;
+        default:
+            for(const w of black_pieces){
+                if(w.type == "pawn" && PawnChecking(w.x, w.y, w.direction, turn.white)) return true;
+                if(w.type == "rook" && LateralChecking(w.x, w.y, turn.white)) return true;
+                if(w.type == "knight" && KnightChecking(w.x, w.y, turn.white)) return true;
+                if(w.type == "bishop" && DiagonalChecking(w.x, w.y, turn.white)) return true;
+                if(w.type == "queen" && LateralChecking(w.x, w.y, turn.white) || DiagonalChecking(w.x, w.y, turn.white)) return true;
+            }
+            return false;
+    }
+}
+
 function Checkmate(){
     switch(current_turn){
         case turn.black:

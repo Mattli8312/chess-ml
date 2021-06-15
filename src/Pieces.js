@@ -43,6 +43,8 @@ class Piece{
             notation += 'x';
         }
         notation += letter_coords[this.x] + number_coords[this.y]; 
+        if(Checkmate()) notation += "#";
+        else if(Check()) notation += "+";
         new_move.innerHTML = notation;
         MoveHistory.appendChild(new_move);
         move_counter ++;
