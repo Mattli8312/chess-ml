@@ -64,6 +64,7 @@
 }
 
 #waiting_tabs{
+    height: 10vw;
     display: flex;
     padding: 1em;
     justify-content: space-around;
@@ -198,7 +199,7 @@ div[type="button"]:hover{
 .tab{
     width: 2vw;
     background: white;
-    transition: ease-in-out 0.2s;
+    transition: ease-in-out 0.7s;
     margin: 1vw;
 }
 

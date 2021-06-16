@@ -41,7 +41,8 @@ const white_clock = {
 }
 var game_enabled, MasterClock;
 var current_turn, selected_highlighter;
-var move_counter, current_game_mode;
+var move_counter, current_game_mode; 
+var load_counter = 0;
 var number_coords = ['8','7','6','5','4','3','2','1'];
 var letter_coords = ['a','b','c','d','e','f','g','h'];
 
@@ -202,3 +203,21 @@ MasterClock = setInterval(() => {
         }
     }
 }, 1000);
+
+LoadClock = setInterval(()=>{
+    switch(load_counter % 3){
+        case 0:
+            document.getElementById("bar1").setAttribute("enable", "high");
+            document.getElementById("bar3").setAttribute("enable", "low");
+            break;
+        case 1:
+            document.getElementById("bar2").setAttribute("enable", "high");
+            document.getElementById("bar1").setAttribute("enable", "low");
+            break;
+        default:
+            document.getElementById("bar3").setAttribute("enable", "high");
+            document.getElementById("bar2").setAttribute("enable", "low");
+            break;
+    }
+    load_counter ++;
+},500)
