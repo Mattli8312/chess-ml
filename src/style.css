@@ -46,6 +46,29 @@
     background: var(--main-page-background);
 }
 
+#loading_page{
+    background: var(--main-page-background);
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    color: white;
+}
+
+#screen{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 2em;
+}
+
+#waiting_tabs{
+    display: flex;
+    padding: 1em;
+    justify-content: space-around;
+}
+
 #promotebox{
     border-radius: 10px;
     flex-direction: row;
@@ -170,4 +193,19 @@ div[type="button"]:hover{
     background: white;
     color: var(--main-page-background);
     border-radius: 25px;
+}
+
+.tab{
+    width: 2vw;
+    background: white;
+    transition: ease-in-out 0.2s;
+    margin: 1vw;
+}
+
+div[enable="low"]{
+    height: 1vw;
+}
+
+div[enable="high"]{
+    height: 4vw;
 }

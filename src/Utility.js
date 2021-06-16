@@ -366,7 +366,7 @@ function EnablePromote(p, piece){
             move.style.color = "white"; move.style.fontSize = "1.5em";
             move.innerHTML = notation;
             MoveHistory.appendChild(move);
-            move_counter ++;
+            move_counter++;
         })
         promote_box.appendChild(new_);
     }

@@ -4,6 +4,7 @@ const promote_box = document.getElementById("promotebox");
 const main_page = document.getElementById("main_page");
 const creategameMode = document.getElementById("creategameMode");
 const game_page = document.getElementById("game_page");
+const load_page = document.getElementById("loading_page");
 const bullet = document.getElementById("3min");
 const blitz = document.getElementById("5min");
 const rapid = document.getElementById("10min");
@@ -24,6 +25,11 @@ const turn = {
     black_winner: "BW",
     none: "N"
 }
+const games = {
+    rapid: 10,
+    blitz: 5,
+    bullet: 3
+}
 //Server data
 const black_clock = {
     min: 10,
@@ -35,7 +41,7 @@ const white_clock = {
 }
 var game_enabled, MasterClock;
 var current_turn, selected_highlighter;
-var move_counter;
+var move_counter, current_game_mode;
 var number_coords = ['8','7','6','5','4','3','2','1'];
 var letter_coords = ['a','b','c','d','e','f','g','h'];
 
@@ -116,11 +122,17 @@ function Reset_board(){
     selected_highlighter = null;
 }
 
-function NewGame(minutes){
+function NewGame(type){
+    winnerPage.setAttribute("enable", "false");
     game_page.setAttribute("enable", "true");
     main_page.setAttribute("enable","false");
     board.setAttribute("enable","true");
-    white_clock.min = black_clock.min = minutes;
+    game_enabled = true;
+    while(MoveHistory.firstChild) MoveHistory.removeChild(MoveHistory.firstChild);
+    var move_title = document.createElement("h1"); move_title.innerHTML = "Moves:";
+    MoveHistory.appendChild(move_title);
+    current_game_mode = type;
+    white_clock.min = black_clock.min = type;
     white_clock.sec = black_clock.sec = 0;
     move_counter = 1;
     white_clk.innerHTML = white_clock.sec < 10 ? white_clock.min + ':0' + white_clock.sec : white_clock.min + ':' + white_clock.sec;
@@ -134,13 +146,19 @@ function MainPage(){
     creategameMode.setAttribute("enable", "false");
     main_page.setAttribute("enable", "true");
     game_page.setAttribute("enable", "false");
+    load_page.setAttribute("enable", "false");
     board.setAttribute("enable", "false");
     game_enabled = false;
 }
 
 function GamePage(){
     creategameMode.setAttribute("enable", "true");
-    game_enabled = true;
+}
+
+function LoadingPage(){
+    game_page.setAttribute("enable", "false");
+    main_page.setAttribute("enable", "false");
+    load_page.setAttribute("enable", "true");
 }
 
 function Winner(){
