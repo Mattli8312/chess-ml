@@ -46,9 +46,12 @@ var load_counter = 0;
 var number_coords = ['8','7','6','5','4','3','2','1'];
 var letter_coords = ['a','b','c','d','e','f','g','h'];
 //Server connection
-
+var game_code;
 var socket = io();
-socket.emit("Connected", load_counter);
+socket.on("gamecode", (socket_code)=> {
+    game_code = socket_code;
+    console.log(game_code);
+});
 
 function Initialize_board(){
     //First erase all previous tiles
@@ -164,6 +167,7 @@ function LoadingPage(){
     game_page.setAttribute("enable", "false");
     main_page.setAttribute("enable", "false");
     load_page.setAttribute("enable", "true");
+    document.getElementById("loadcode").innerHTML = "You Game Code: " + game_code;
 }
 
 function Winner(){
