@@ -45,6 +45,10 @@ var move_counter, current_game_mode;
 var load_counter = 0;
 var number_coords = ['8','7','6','5','4','3','2','1'];
 var letter_coords = ['a','b','c','d','e','f','g','h'];
+//Server connection
+
+var socket = io();
+socket.emit("Connected", load_counter);
 
 function Initialize_board(){
     //First erase all previous tiles
