@@ -163,11 +163,12 @@ function GamePage(){
     creategameMode.setAttribute("enable", "true");
 }
 
-function LoadingPage(){
+function LoadingPage(game_mode){
     game_page.setAttribute("enable", "false");
     main_page.setAttribute("enable", "false");
     load_page.setAttribute("enable", "true");
     document.getElementById("loadcode").innerHTML = "You Game Code: " + game_code;
+    current_game_mode = game_mode;
 }
 
 function Winner(){
