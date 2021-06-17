@@ -6,7 +6,7 @@ const server = http.createServer(app);
 const {Server} = require('socket.io');
 const io = new Server(server);
 
-export function GameCodeGenerator(){
+function GameCodeGenerator(){
     var characters = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     var result = "";
     for(var a = 0; a < 5; a++){
@@ -15,7 +15,6 @@ export function GameCodeGenerator(){
     }
     return result;
 }
-var game_rooms = new Map();
 
 app.use(express.static('src'))
 
@@ -24,18 +23,35 @@ io.on('connection', (socket) =>{
     /**
      * Transmission
      */
-    var socket_code = GameCodeGenerator();
-    if(!game_rooms.has(socket_code)) game_rooms[socket_code] = 1;
-    else{
-        game_rooms[socket_code] ++;
-        if(game_rooms[socket_code] < 2)// emit connected signal 
-            console.log("connected");
-        else console.log("Game room already contains two players");
-    }
-    socket.emit("gamecode", socket_code);
+    var game_code = GameCodeGenerator();
     /**
-     * Receival
+     * Receival/Response
      */
+    socket.on("CreateGame", ()=>{
+        console.log(game_code);
+        socket.join(game_code);
+        socket.emit("Connected", game_code);
+    })
+    socket.on("ChangeRooms", (input_code)=>{
+        socket.leave(game_code);
+        game_code = input_code;
+        socket.join(game_code);
+        socket.to(game_code).emit("PlayerConnected");
+    })
+    socket.on("Handshake", (current_game_mode)=>{
+        socket.to(game_code).emit("HandshakeComplete", current_game_mode);
+    })
+    /**
+     * Data
+     */
+    //Clock data
+    socket.on("ClockData", (clocks)=>{ socket.to(game_code).emit("Clocks", clocks) });
+    //Turn data
+    socket.on("TurnData", (turn)=>{ socket.to(game_code).emit("Turn", turn) });
+    //Movement History Data
+    socket.on("MoveHistory", (notation)=>{ socket.to(game_code).emit("Move", notation) });
+    //Physical Movement
+    socket.on("UpdateMovement", (data)=>{ socket.to(game_code).emit("UpdateMove", data)});
 })
 
 server.listen(PORT, () =>{

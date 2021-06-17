@@ -29,10 +29,20 @@
             - [x]: Moving
             - [x]: Pins
 - **Work on webserver and Socket implementation**
-    - [] Get right dependencies
-    - [] Implement game rooms and state machine
+    - [x] Get right dependencies
+    - [?] Implement game rooms and state machine
     - [] Proper data transfer between clients in room
+        - [x]: clock data
+        - [x]: turn data
+        - []: Movement data
+            -[x]: Move Notation
+            -[x]: Physical Movement/Update of Pieces
+            -[]: En Pasant
+            -[]: Promotion
+            -[]: Castle
+        - []: Win data
+        - []: Rematch data
     - [] Deploy on Heroku and Github
-- **Chess Engine**
+- **Chess Engine** (Save for later)
     - [] Implement Minimax algorithm
     - [] Run TestCases and optimize using alpha beta pruning

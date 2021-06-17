@@ -23,7 +23,7 @@ class Piece{
         this.img.setAttribute("enpasant", this.en_pasant);
         this.img.setAttribute("castle", this.castle_enable);
         this.img.addEventListener('click', ()=>{
-            if(current_turn == this.color){
+            if(current_turn == this.color && current_turn == current_color){
                 if(selected_highlighter != null)
                     selected_highlighter.style.background = "none";
                 this.img.style.background = "rgba(0,255,128,0.5)";
@@ -41,10 +41,10 @@ class Piece{
         if(this.type != "pawn") 
             notation += this.type != "knight" ? this.src[8] : 'N';
         if(capture){ 
-            if(this.type == "pawn") notation += letter_coords[p.x];
+            if(this.type == "pawn") notation += letter_coords[current_color == turn.white ? p.x : 7 - p.x];
             notation += 'x';
         }
-        notation += letter_coords[this.x] + number_coords[this.y]; 
+        notation += letter_coords[current_color == turn.white ? this.x : 7 - this.x] + number_coords[current_color == turn.white ? this.y : 7 - this.y]; 
         if(Checkmate()){
             notation += "#";
             checkmate = true;
@@ -58,6 +58,8 @@ class Piece{
         new_move.innerHTML = notation;
         MoveHistory.appendChild(new_move);
         move_counter ++;
+        //Data Transmission
+        socket.emit("MoveHistory", notation);
         return checkmate;
     }
     MoveEventListener(p){
@@ -118,6 +120,8 @@ class Piece{
             this.pawn_init = false;
             this.castle_enable = false;
             new_tile.appendChild(this.img);
+            //Transmit mvt data
+            socket.emit("UpdateMovement", { x: this.x, y: this.y, xi: p.x, yi: p.y, ep: this.en_pasant})
             this.y = p.y;
             this.x = p.x;
             this.img.setAttribute("id", this.y + ',' + this.x + ',img');
@@ -131,6 +135,9 @@ class Piece{
                 current_turn = current_turn == turn.white ? turn.black_winner : turn.white_winner;
                 Winner();
             }
+            //Data Transmission
+            //Transmit Turn Data
+            socket.emit("TurnData", (current_turn));
         });
         next.appendChild(next_tile);
     }
@@ -148,12 +155,7 @@ class Piece{
                 return;
             }
             var enemy_color = this.color == "W" ? "black" : "white";
-            var prev = {
-                x: this.x,
-                y: this.y,
-                new_x: p.x,
-                new_y: p.y
-            }
+            var prev = { x: this.x, y: this.y, xi: p.x, yi: p.y, ep: this.en_pasant}
             var tile = CapturePiece(enemy_color, p.x, p.y);
             if(p.ep){ //For en pasant
                 tile = document.getElementById((p.y + this.direction) + ',' + p.x);
@@ -174,6 +176,8 @@ class Piece{
                 current_turn = current_turn == turn.black ? turn.white_winner : turn.black_winner;
                 Winner();
             }
+            socket.emit("UpdateMovement", prev);
+            socket.emit("TurnData", (current_turn));
         })
     }
 }
