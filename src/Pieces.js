@@ -155,10 +155,13 @@ class Piece{
                 return;
             }
             var enemy_color = this.color == "W" ? "black" : "white";
-            var prev = { x: this.x, y: this.y, xi: p.x, yi: p.y, ep: this.en_pasant}
             var tile = CapturePiece(enemy_color, p.x, p.y);
+            var prev = { x: this.x, y: this.y, xi: p.x, yi: p.y, ep: this.en_pasant, ep_cap: -1}
             if(p.ep){ //For en pasant
                 tile = document.getElementById((p.y + this.direction) + ',' + p.x);
+                prev.ep_cap = p.y;
+                console.log(prev.ep_cap);
+                prev.yi += this.direction;
                 this.y = p.y + this.direction;
             }
             else{

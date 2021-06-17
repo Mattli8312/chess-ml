@@ -125,6 +125,13 @@ socket.on("UpdateMove", (data)=>{
             for(const p of white_pieces){
                 if((7 - p.x) == data.x && (7 - p.y) == data.y){
                     var new_tile = document.getElementById((7 - data.yi) + ',' + (7 - data.xi));
+                    var prev_tile = null;
+                    if(data.ep_cap && data.ep_cap > -1) {
+                        prev_tile = document.getElementById((7 - data.ep_cap) + ',' + (7 - data.xi));
+                        prev_tile.removeChild(prev_tile.firstChild);
+                        for(var a = 0; a <  black_pieces.length; a++) 
+                            if(black_pieces[a].x == (7 - data.xi) && black_pieces[a].y == (7 - data.ep_cap)) black_pieces.splice(a, 1);
+                    }
                     if(new_tile.firstChild) {
                         for(var a = 0; a <  black_pieces.length; a++) 
                             if(black_pieces[a].x == (7 - data.xi) && black_pieces[a].y == (7 - data.yi)) black_pieces.splice(a, 1);
@@ -133,6 +140,7 @@ socket.on("UpdateMove", (data)=>{
                     new_tile.appendChild(p.img);
                     p.x = 7 - data.xi; p.y = 7 - data.yi;
                     p.img.setAttribute("id", p.y + ',' + p.x + ',img');
+                    p.img.setAttribute("enpasant", data.ep);
                     break;
                 }
             }
@@ -141,6 +149,13 @@ socket.on("UpdateMove", (data)=>{
             for(const p of black_pieces){
                 if((7 - p.x) == data.x && (7 - p.y) == data.y){
                     var new_tile = document.getElementById((7 - data.yi) + ',' + (7 - data.xi));
+                    var prev_tile = null;
+                    if(data.ep_cap && data.ep_cap > -1) {
+                        prev_tile = document.getElementById((7 - data.ep_cap) + ',' + (7 - data.xi));
+                        prev_tile.removeChild(prev_tile.firstChild);
+                        for(var a = 0; a <  white_pieces.length; a++) 
+                            if(white_pieces[a].x == (7 - data.xi) && white_pieces[a].y == (7 - data.ep_cap)) white_pieces.splice(a, 1);
+                    }
                     if(new_tile.firstChild) {
                         for(var a = 0; a <  white_pieces.length; a++) 
                             if(white_pieces[a].x == (7 - data.xi) && white_pieces[a].y == (7 - data.yi)) white_pieces.splice(a, 1);
@@ -149,6 +164,7 @@ socket.on("UpdateMove", (data)=>{
                     new_tile.appendChild(p.img);
                     p.x = 7 - data.xi; p.y = 7 - data.yi;
                     p.img.setAttribute("id", p.y + ',' + p.x + ',img');
+                    p.img.setAttribute("enpasant", data.ep);
                     break;
                 }
             }
