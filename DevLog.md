@@ -1,27 +1,27 @@
 # List of Objectives
 
 - **Complete GameLogic**
-    - [] **Pawns**
+    - [x] **Pawns**
         - [x]: Move in right direction
         - [x]: Move 2 times if on starting position
         - [x]: Capture Enemy Pieces
-        - []: Promoting piece
+        - [x]: Promoting piece
         - [x]: En Pasant
     - [x] **Rooks**
-        - [x]: Capture Piece
+        - [x]: Capture  
         - [x]: Movements 
         - [x]: Castling
     - [x] **Knights**
-        - [x]: Capture Piece
+        - [x]: Capture 
         - [x]: Movements
     - [x] **Bishop**
-        - [x]: Capture Piece
+        - [x]: Capture 
         - [x]: Movements
     - [x] **Queen**
-        - [x]: Capture Piece
+        - [x]: Capture 
         - [x]: Movements
     - [x] **King**
-        - [x]: Capture Piece
+        - [x]: Capture 
         - [x]: Movements
         - [x]: Castling
         - [x]: Check/Mate

@@ -41,7 +41,6 @@
      if(player_number < 2){ 
          socket.emit("Handshake", current_game_mode);
          player_number++;
-         alert("Player connected!");
          NewGame(current_game_mode, false);
          console.log(current_game_mode);
      }
@@ -51,7 +50,6 @@
  });
  socket.on("HandshakeComplete", (game_mode)=>{
      current_color = turn.black; //Player 2;
-     alert("Player responded!");
      current_game_mode = game_mode;
      NewGame(current_game_mode, true);
  })
@@ -95,6 +93,8 @@
                      p.x = 7 - data.xi; p.y = 7 - data.yi;
                      p.img.setAttribute("id", p.y + ',' + p.x + ',img');
                      p.img.setAttribute("enpasant", data.ep);
+                     p.castle_enable = false; p.img.setAttribute("castle", false);
+                     console.log(p);
                      break;
                  }
              }
@@ -119,6 +119,8 @@
                      p.x = 7 - data.xi; p.y = 7 - data.yi;
                      p.img.setAttribute("id", p.y + ',' + p.x + ',img');
                      p.img.setAttribute("enpasant", data.ep);
+                     p.castle_enable = false; p.img.setAttribute("castle", false);
+                     console.log(p);
                      break;
                  }
              }

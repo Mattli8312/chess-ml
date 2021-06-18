@@ -255,6 +255,9 @@ function Checkmate(){
             for(const p of black_pieces){
                 p.Move();
                 if(potential_attacks.length || potential_moves.length){
+                    console.log(p);
+                    console.log(potential_attacks);
+                    console.log(potential_moves);
                     ResetMoves();
                     return false;
                 }
@@ -265,6 +268,9 @@ function Checkmate(){
             for(const w of white_pieces){
                 w.Move();
                 if(potential_attacks.length || potential_moves.length){
+                    console.log(w);
+                    console.log(potential_attacks);
+                    console.log(potential_moves);
                     ResetMoves();
                     return false;
                 }

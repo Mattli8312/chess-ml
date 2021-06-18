@@ -143,6 +143,7 @@ class Piece{
             current_turn = current_turn == turn.black ? turn.white : turn.black;
             ResetMoves();
             ResetCurrentPlayersPawns(); //For en pasant
+            console.log(current_turn);
             if(this.AddMove(p)){
                 current_turn = current_turn == turn.white ? turn.black_winner : turn.white_winner;
                 Winner();
@@ -187,6 +188,7 @@ class Piece{
             this.castle_enable = false;
             ResetMoves();
             ResetCurrentPlayersPawns(); //For en pasant
+            console.log(current_turn);
             if(this.AddMove(prev,true)){
                 current_turn = current_turn == turn.black ? turn.white_winner : turn.black_winner;
                 Winner();
