@@ -52,7 +52,7 @@ class Piece{
         else if(Check()) notation += "+";
         if(p.castle){
             notation = move_counter.toString() + '.';
-            if(p.delx < 0) notation += " O-O-O";
+            if((p.delx < 0) ^ (current_color == turn.black)) notation += " O-O-O";
             else notation += " O-O";
         }
         new_move.innerHTML = notation;
