@@ -112,6 +112,13 @@ class Piece{
                         } 
                         break;
                 }
+                //Handle Castling
+                socket.emit("UpdateMovement", {
+                    x: rook_x,
+                    y: p.y,
+                    xi: p.x - p.delx,
+                    yi: p.y
+                });
             }
             /**
              * Reinitializing 
@@ -121,7 +128,12 @@ class Piece{
             this.castle_enable = false;
             new_tile.appendChild(this.img);
             //Transmit mvt data
-            socket.emit("UpdateMovement", { x: this.x, y: this.y, xi: p.x, yi: p.y, ep: this.en_pasant})
+            socket.emit("UpdateMovement", {
+                 x: this.x, 
+                 y: this.y, 
+                 xi: p.x, 
+                 yi: p.y, 
+                 ep: this.en_pasant})
             this.y = p.y;
             this.x = p.x;
             this.img.setAttribute("id", this.y + ',' + this.x + ',img');

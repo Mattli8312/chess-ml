@@ -320,24 +320,38 @@ function EnablePromote(p, piece){
             game_page.appendChild(promote_box);
             console.log(o);
             var src_ = "Pieces/" + piece.color + o + ".png";
+            var promoted_piece = null;
             switch(o){
                 case "Q":
                     new_piece = new Queen(p.x, p.y, piece.color, 0, src_);
-                    notation += "=Q";
+                    notation += "=Q"; promoted_piece = "Q";
                     break;
                 case "R":
                     new_piece = new Rook(p.x, p.y, piece.color, 0, src_);
-                    notation += "=R";
+                    notation += "=R"; promoted_piece = "R";
                     break;
                 case "Kn":
                     new_piece = new Knight(p.x,p.y,piece.color, 0, src_);
-                    notation += "=N"
+                    notation += "=N"; promoted_piece = "Kn";
                     break;
                 default:
                     new_piece = new Bishop(p.y,p.y,piece.color, 0, src_);
-                    notation += "=B"
+                    notation += "=B"; promoted_piece = "B";
                     break;
             }
+            socket.emit("UpdateMovement", {
+                x: piece.x,
+                y: piece.y,
+                xi: p.x,
+                yi: p.y
+            })
+            socket.emit("PromotePiece", {
+                x: p.x,
+                y: p.y,
+                pp: promoted_piece
+            })
+            socket.emit("TurnData", current_turn);
+            socket.emit("MoveHistory", notation);
             new_piece.Initialize();
             new_piece.Render();
             switch(piece.color){

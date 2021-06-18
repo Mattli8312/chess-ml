@@ -34,12 +34,12 @@
     - [] Proper data transfer between clients in room
         - [x]: clock data
         - [x]: turn data
-        - []: Movement data
+        - [x]: Movement data
             -[x]: Move Notation
             -[x]: Physical Movement/Update of Pieces
-            -[]: En Pasant
-            -[]: Promotion
-            -[]: Castle
+            -[x]: En Pasant
+            -[x]: Promotion
+            -[x]: Castle
         - []: Win data
         - []: Rematch data
     - [] Deploy on Heroku and Github

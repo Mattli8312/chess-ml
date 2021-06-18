@@ -52,6 +52,8 @@ io.on('connection', (socket) =>{
     socket.on("MoveHistory", (notation)=>{ socket.to(game_code).emit("Move", notation) });
     //Physical Movement
     socket.on("UpdateMovement", (data)=>{ socket.to(game_code).emit("UpdateMove", data)});
+    //Promote Piece
+    socket.on("PromotePiece", (data)=>{ socket.to(game_code).emit("Promote", data)});
 })
 
 server.listen(PORT, () =>{
