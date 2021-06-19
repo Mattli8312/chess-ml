@@ -30,10 +30,10 @@
             - [x]: Pins
 - **Work on webserver and Socket implementation**
     - [x] Get right dependencies
-    - [?] Implement game rooms and state machine
-        - []: change game mode
-        - []: Disconnect from a game
-        - []: Room capacity restrictions
+    - [x] Implement game rooms and state machine
+        - [x]: change game mode
+        - [x]: Disconnect from a game
+        - [x]: Room capacity restrictions
     - [] Proper data transfer between clients in room
         - [x]: clock data
         - [x]: turn data

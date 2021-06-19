@@ -180,8 +180,9 @@ function HandleJoinRoom(){
     }
 }
 
-function Winner(){
-    socket.emit("WinnerData", current_turn);
+function Winner(transmit = true){
+    if(transmit)
+        socket.emit("WinnerData", current_turn);
     var notation = "";
     game_enabled = false;
     switch(current_turn){
@@ -196,12 +197,18 @@ function Winner(){
     }
     setTimeout(()=>{
         winner.innerHTML = notation;
+        console.log("reached");
         winnerPage.setAttribute("enable", "true");
     }, 1000)
 }
 
 function RematchRequest(){
     /**@todo */
+    socket.emit("RematchRequest");
+}
+
+function RematchDecline(){
+    winnerPage.setAttribute("enable", "false");
 }
 
 function BackButton(){

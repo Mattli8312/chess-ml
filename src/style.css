@@ -210,3 +210,10 @@ div[enable="low"]{
 div[enable="high"]{
     height: 4vw;
 }
+
+div[type="closebutton"]{
+    position: absolute;
+    top: 0; right: 0;
+    padding: 0 0.2em;
+    border-radius: 50%;
+}

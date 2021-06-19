@@ -170,7 +170,7 @@ socket.on("Promote", (data)=>{
 })
 socket.on("Winner", (data)=>{
     current_turn = data;
-    Winner();
+    Winner(false);
 })
 socket.on("Disconnect", ()=>{
     //Add message to Move History
@@ -182,4 +182,7 @@ socket.on("Disconnect", ()=>{
     player_number--;
     //Stop the clock
     if(MasterClock != null) clearInterval(MasterClock);
+})
+socket.on("RematchReq", ()=>{
+    /**@todo */
 })
