@@ -151,6 +151,8 @@ class Piece{
             //Data Transmission
             //Transmit Turn Data
             socket.emit("TurnData", (current_turn));
+            //Keep Move history constantly looking at the bottom
+            MoveHistory.scrollTop = MoveHistory.scrollHeight;
         });
         next.appendChild(next_tile);
     }
@@ -195,6 +197,8 @@ class Piece{
             }
             socket.emit("UpdateMovement", prev);
             socket.emit("TurnData", (current_turn));
+            //Keep Move history constantly looking at the bottom
+            MoveHistory.scrollTop = MoveHistory.scrollHeight;
         })
     }
 }

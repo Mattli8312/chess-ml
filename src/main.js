@@ -8,6 +8,7 @@ const load_page = document.getElementById("loading_page");
 const bullet = document.getElementById("3min");
 const blitz = document.getElementById("5min");
 const rapid = document.getElementById("10min");
+const refpage = document.getElementById("RefPage");
 const black_clk = document.getElementById("black_clock");
 const white_clk = document.getElementById("white_clock");
 const MoveHistory = document.getElementById("MoveHistory");
@@ -147,6 +148,12 @@ function NewGame(type = games.rapid, flip = false){
     Reset_board();
     Initialize_board();
     Initialize_pieces(flip);
+    if(flip){
+        while(refpage.firstChild) refpage.removeChild(refpage.firstChild);
+        refpage.appendChild(white_clk);
+        refpage.appendChild(MoveHistory);
+        refpage.appendChild(black_clk);
+    }
 }
 
 function MainPage(){
@@ -250,3 +257,4 @@ LoadClock = setInterval(()=>{
 window.addEventListener('beforeunload', ()=>{
     socket.emit("PlayerDisconnect", game_code)
 })
+

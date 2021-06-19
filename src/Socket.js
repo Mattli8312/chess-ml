@@ -49,6 +49,8 @@ socket.on("Move", (notation_)=>{
     move_tile.innerHTML = notation_;
     move_tile.style.color = "white"; move_tile.style.fontSize = "1.5em";
     MoveHistory.appendChild(move_tile);
+    //Keep Move history constantly looking at the bottom
+    MoveHistory.scrollTop = MoveHistory.scrollHeight;
     move_counter++;
 })
 socket.on("UpdateMove", (data)=>{
@@ -165,6 +167,8 @@ socket.on("Disconnect", ()=>{
 })
 socket.on("RematchReq", ()=>{
     /**@todo */
+    //Keep Move history constantly looking at the bottom
+    MoveHistory.scrollTop = MoveHistory.scrollHeight;
     rematchbox.setAttribute("enable", "true");
     winnerPage.setAttribute("enable", "false");
     MoveHistory.appendChild(rematchbox);
