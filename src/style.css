@@ -212,8 +212,14 @@ div[enable="high"]{
 }
 
 div[type="closebutton"]{
+    cursor: pointer;
     position: absolute;
     top: 0; right: 0;
-    padding: 0 0.2em;
-    border-radius: 50%;
+    padding: 0 0.3em 0.1em;
+    margin: 0.1em;
+    border-radius: 10px;
+}
+div[type="closebutton"]:hover{
+    background: white;
+    color: rgb(50,50,50)
 }

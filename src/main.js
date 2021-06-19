@@ -235,3 +235,8 @@ LoadClock = setInterval(()=>{
     }
     load_counter ++;
 },500)
+
+//Event listener to trigger user leaving the serve
+window.addEventListener('beforeunload', ()=>{
+    socket.emit("PlayerDisconnect", game_code)
+})
