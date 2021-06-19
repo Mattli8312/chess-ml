@@ -31,6 +31,9 @@
 - **Work on webserver and Socket implementation**
     - [x] Get right dependencies
     - [?] Implement game rooms and state machine
+        - []: change game mode
+        - []: Disconnect from a game
+        - []: Room capacity restrictions
     - [] Proper data transfer between clients in room
         - [x]: clock data
         - [x]: turn data
@@ -40,7 +43,7 @@
             -[x]: En Pasant
             -[x]: Promotion
             -[x]: Castle
-        - []: Win data
+        - [x]: Win data
         - []: Rematch data
     - [] Deploy on Heroku and Github
 - **Chess Engine** (Save for later)

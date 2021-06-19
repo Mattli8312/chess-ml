@@ -28,6 +28,7 @@ io.on('connection', (socket) =>{
      * Receival/Response
      */
     socket.on("CreateGame", ()=>{
+        game_code = GameCodeGenerator();
         console.log(game_code);
         socket.join(game_code);
         socket.emit("Connected", game_code);
@@ -54,6 +55,13 @@ io.on('connection', (socket) =>{
     socket.on("UpdateMovement", (data)=>{ socket.to(game_code).emit("UpdateMove", data)});
     //Promote Piece
     socket.on("PromotePiece", (data)=>{ socket.to(game_code).emit("Promote", data)});
+    //Winner 
+    socket.on("WinnerData", (data)=>{ socket.to(game_code).emit("Winner", data)});
+    //Disconnect
+    socket.on("PlayerDisconnect", (data)=>{
+        socket.leave(data);
+        socket.to(data).emit("Disconnect")
+    });
 })
 
 server.listen(PORT, () =>{

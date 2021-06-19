@@ -27,7 +27,7 @@
         <input id="join" maxLength="5" type="text" placeholder="enter 5 letter code">
     </div>
     <div id="loading_page" enable="false">
-        <div id="back" type="button" onclick="MainPage()">Back</div>
+        <div id="back" type="button" onclick="BackButton()">Back</div>
         <div id="screen">
             <div id="loadcode">Your Game Code: </div>
             <div id="waiting_title">waiting for connection</div>
@@ -41,7 +41,7 @@
     </div>
     <div id="game_page" enable="false">
         <div id="promotebox" enable="false"></div>
-        <div id="back" type="button" onclick="MainPage()">Back</div>
+        <div id="back" type="button" onclick="BackButton()">Back</div>
         <div id="board" enable="false"></div>
         <div id="RefPage">
             <div id="black_clock"></div>
@@ -52,7 +52,7 @@
         </div>
         <div id="winnerPage" enable = "false">
             <div id="winner"></div>
-            <div id="Rematch" type ="button" onclick="NewGame(current_game_mode)">Rematch</div>
+            <div id="Rematch" type ="button" onclick="">Rematch</div>
         </div>
     </div>    
     <script src="https://cdn.socket.io/3.1.3/socket.io.min.js" integrity="sha384-cPwlPLvBTa3sKAgddT6krw0cJat7egBga3DJepJyrLl4Q9/5WLra3rrnMcyTyOnh" crossorigin="anonymous"></script>

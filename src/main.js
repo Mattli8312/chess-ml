@@ -39,7 +39,7 @@ const white_clock = {
     min: 10,
     sec: 0
 }
-var game_enabled, MasterClock;
+var game_enabled, MasterClock = null;
 var current_turn, selected_highlighter, current_color;
 var move_counter, current_game_mode; 
 var load_counter = 0;
@@ -137,6 +137,7 @@ function NewGame(type = games.rapid, flip = false){
     var move_title = document.createElement("h1"); move_title.innerHTML = "Moves:";
     MoveHistory.appendChild(move_title);
     current_game_mode = type;
+    current_turn = turn.white;
     white_clock.min = black_clock.min = type;
     white_clock.sec = black_clock.sec = 0;
     move_counter = 1;
@@ -180,6 +181,7 @@ function HandleJoinRoom(){
 }
 
 function Winner(){
+    socket.emit("WinnerData", current_turn);
     var notation = "";
     game_enabled = false;
     switch(current_turn){
@@ -196,6 +198,16 @@ function Winner(){
         winner.innerHTML = notation;
         winnerPage.setAttribute("enable", "true");
     }, 1000)
+}
+
+function RematchRequest(){
+    /**@todo */
+}
+
+function BackButton(){
+    MainPage();
+    if(MasterClock != null) clearInterval(MasterClock);
+    socket.emit("PlayerDisconnect", game_code);
 }
 
 LoadClock = setInterval(()=>{
