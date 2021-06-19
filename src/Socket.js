@@ -175,6 +175,8 @@ socket.on("Winner", (data)=>{
 socket.on("Disconnect", ()=>{
     //Add message to Move History
     var block = document.createElement("div");
+    //Cannot rematch, so close the winnerPage
+    winnerPage.setAttribute("enable", "false");
     block.innerHTML = "Game Terminated";
     block.style.color = "white"; block.style.fontSize = "1.5em";
     MoveHistory.appendChild(block);
@@ -185,4 +187,6 @@ socket.on("Disconnect", ()=>{
 })
 socket.on("RematchReq", ()=>{
     /**@todo */
+    rematchbox.setAttribute("enable", "true");
+    MoveHistory.appendChild(rematchbox);
 })

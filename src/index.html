@@ -40,7 +40,16 @@
         </div>
     </div>
     <div id="game_page" enable="false">
+        <!--Statically hidden elements-->
         <div id="promotebox" enable="false"></div>
+        <div id="rematchbox" enable="false">
+            <p>Rematch requested by opponent: </p>
+            <div id="rematch_subbox">
+                <div id="accept" type="button">Accept</div>
+                <div id="decline" type="button">Decline</div>
+            </div>
+        </div>
+        <!--Visible elements-->
         <div id="back" type="button" onclick="BackButton()">Back</div>
         <div id="board" enable="false"></div>
         <div id="RefPage">
@@ -53,7 +62,7 @@
         <div id="winnerPage" enable = "false">
             <div id="close" type="closebutton" onclick="winnerPage.setAttribute('enable', false)">x</div>
             <div id="winner"></div>
-            <div id="Rematch" type ="button">Rematch</div>
+            <div id="Rematch" type ="button" onclick="RematchRequest()">Rematch</div>
         </div>
     </div>    
     <script src="https://cdn.socket.io/3.1.3/socket.io.min.js" integrity="sha384-cPwlPLvBTa3sKAgddT6krw0cJat7egBga3DJepJyrLl4Q9/5WLra3rrnMcyTyOnh" crossorigin="anonymous"></script>

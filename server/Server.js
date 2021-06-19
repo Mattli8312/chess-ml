@@ -62,6 +62,8 @@ io.on('connection', (socket) =>{
         socket.leave(data);
         socket.to(data).emit("Disconnect")
     });
+    //Rematch
+    socket.on("RematchRequest", ()=> {socket.to(game_code).emit("RematchReq")});
 })
 
 server.listen(PORT, () =>{

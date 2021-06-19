@@ -13,6 +13,7 @@ const white_clk = document.getElementById("white_clock");
 const MoveHistory = document.getElementById("MoveHistory");
 const winnerPage = document.getElementById("winnerPage");
 const winner = document.getElementById("winner");
+const rematchbox = document.getElementById("rematchbox");
 //Client data
 const black_pieces = [];
 const white_pieces = [];
@@ -205,10 +206,6 @@ function Winner(transmit = true){
 function RematchRequest(){
     /**@todo */
     socket.emit("RematchRequest");
-}
-
-function RematchDecline(){
-    winnerPage.setAttribute("enable", "false");
 }
 
 function BackButton(){
