@@ -207,6 +207,7 @@ function RematchRequest(){
 function BackButton(){
     MainPage();
     if(MasterClock != null) clearInterval(MasterClock);
+    player_number = 0;
     socket.emit("PlayerDisconnect", game_code);
 }
 

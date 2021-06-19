@@ -1,12 +1,13 @@
 /**
  * Socket/Server connection
  */
-var game_code; player_number = 1;
+var game_code; player_number = 0;
 var socket = io();
 //Initialize current player's default game code
 socket.on("Connected", (socket_code)=> { //Player 1
     game_code = socket_code;
     console.log(game_code);
+    player_number++;
     document.getElementById("loadcode").innerHTML = "You Game Code: " + game_code;
     current_color = turn.white;
     /**
@@ -45,12 +46,14 @@ socket.on("PlayerConnected", ()=>{
         console.log(current_game_mode);
     }
     else{
+        alert("Game Room Full!")
         socket.emit("GameFull"); /**@todo */
     }
 });
 socket.on("HandshakeComplete", (game_mode)=>{
     current_color = turn.black; //Player 2;
     current_game_mode = game_mode;
+    player_number = 2;
     NewGame(current_game_mode, true);
 })
 /**Data Retrieval */
@@ -170,13 +173,13 @@ socket.on("Winner", (data)=>{
     Winner();
 })
 socket.on("Disconnect", ()=>{
-    alert("Player Disconnected");
     //Add message to Move History
     var block = document.createElement("div");
     block.innerHTML = "Game Terminated";
     block.style.color = "white"; block.style.fontSize = "1.5em";
     MoveHistory.appendChild(block);
     move_counter++;
+    player_number--;
     //Stop the clock
-    if(MasterClock != null) clearInteravl(MasterClock);
+    if(MasterClock != null) clearInterval(MasterClock);
 })
