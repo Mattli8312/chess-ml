@@ -34,7 +34,7 @@
         - [x]: change game mode
         - [x]: Disconnect from a game
         - [x]: Room capacity restrictions
-    - [] Proper data transfer between clients in room
+    - [x] Proper data transfer between clients in room
         - [x]: clock data
         - [x]: turn data
         - [x]: Movement data
@@ -44,7 +44,7 @@
             -[x]: Promotion
             -[x]: Castle
         - [x]: Win data
-        - []: Rematch data
+        - [x]: Rematch data
     - [] Deploy on Heroku and Github
 - **Chess Engine** (Save for later)
     - [] Implement Minimax algorithm

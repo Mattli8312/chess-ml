@@ -150,6 +150,7 @@ function NewGame(type = games.rapid, flip = false){
 }
 
 function MainPage(){
+    player_number = 0;
     creategameMode.setAttribute("enable", "false");
     main_page.setAttribute("enable", "true");
     game_page.setAttribute("enable", "false");
@@ -206,12 +207,24 @@ function Winner(transmit = true){
 function RematchRequest(){
     /**@todo */
     socket.emit("RematchRequest");
+    winnerPage.setAttribute("enable", "false");
+}
+
+function RematchAccept(accepted = true){
+    clearInterval(MasterClock)
+    if(player_number > 1){
+        socket.emit("RematchResponse", accepted, game_code);
+        if(accepted) NewGame(current_game_mode, current_color == turn.black);
+        else{ 
+            game_code = null;
+            MainPage();
+        }
+    }
 }
 
 function BackButton(){
     MainPage();
     if(MasterClock != null) clearInterval(MasterClock);
-    player_number = 0;
     socket.emit("PlayerDisconnect", game_code);
 }
 

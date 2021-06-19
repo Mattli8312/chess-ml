@@ -13,29 +13,7 @@ socket.on("Connected", (socket_code)=> { //Player 1
     /**
      * Player 1 will control the master clock which's data will be sent to Player 2
      */
-    MasterClock = setInterval(() => {
-        if(game_enabled){
-            switch(current_turn){
-                case turn.black:
-                    if(!black_clock.sec) {
-                        black_clock.min--; 
-                        black_clock.sec = 60
-                    };
-                    black_clock.sec--;
-                    black_clk.innerHTML = black_clock.sec < 10 ? black_clock.min + ':0' + black_clock.sec : black_clock.min + ':' + black_clock.sec;
-                    break;
-                case turn.white:
-                    if(!white_clock.sec) {
-                        white_clock.min--;
-                        white_clock.sec = 60
-                    };
-                    white_clock.sec--;
-                    white_clk.innerHTML = white_clock.sec < 10 ? white_clock.min + ':0' + white_clock.sec : white_clock.min + ':' + white_clock.sec;
-                    break;
-            }
-            socket.emit("ClockData", {black_clock, white_clock});
-        }
-    }, 1000);
+    Clock();
 });
 //Joining a room
 socket.on("PlayerConnected", ()=>{ 
@@ -188,5 +166,43 @@ socket.on("Disconnect", ()=>{
 socket.on("RematchReq", ()=>{
     /**@todo */
     rematchbox.setAttribute("enable", "true");
+    winnerPage.setAttribute("enable", "false");
     MoveHistory.appendChild(rematchbox);
 })
+socket.on("RematchRes", (data)=>{
+    clearInterval(MasterClock);
+    if(data){
+        NewGame(current_game_mode, current_color == turn.black);
+        Clock();
+    }
+    else{ 
+        MainPage();
+        alert("Rematch Declined");
+    }
+})
+
+function Clock(){
+    MasterClock = setInterval(() => {
+        if(game_enabled){
+            switch(current_turn){
+                case turn.black:
+                    if(!black_clock.sec) {
+                        black_clock.min--; 
+                        black_clock.sec = 60
+                    };
+                    black_clock.sec--;
+                    black_clk.innerHTML = black_clock.sec < 10 ? black_clock.min + ':0' + black_clock.sec : black_clock.min + ':' + black_clock.sec;
+                    break;
+                case turn.white:
+                    if(!white_clock.sec) {
+                        white_clock.min--;
+                        white_clock.sec = 60
+                    };
+                    white_clock.sec--;
+                    white_clk.innerHTML = white_clock.sec < 10 ? white_clock.min + ':0' + white_clock.sec : white_clock.min + ':' + white_clock.sec;
+                    break;
+            }
+            socket.emit("ClockData", {black_clock, white_clock});
+        }
+    }, 1000);
+}
