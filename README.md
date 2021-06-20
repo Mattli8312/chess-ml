@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Based on the iconic game This was built using plain HTML/CSS and Javascript for the front end and Node for the BackEnd. To create the socket/server interface, Express alongside SocketIO were used to facilitate the interactions between different users of the app, enabling the multiplayer feature between those users. This app was then finally deployed on Heroku.
+Inspired by the iconic game of chess, this app was built using plain HTML/CSS and Javascript for the front end and Node for the BackEnd. To create the socket/server interface, Express alongside SocketIO were used to facilitate the interactions between different users of the app, enabling the multiplayer feature between those users. This app was then finally deployed on Heroku.
 
 ## Installation/Usage
  
