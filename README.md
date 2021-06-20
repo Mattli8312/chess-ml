@@ -36,7 +36,7 @@ $ cd chess-ml
 $ node ./server/Server.js
 ```
 
-You should see ```bash Listening on Port 3000``` right below after executing the above commands. Open up a browser and go to localhost 3000. You will see the project running
+You should see ```Listening on Port 3000``` right below after executing the above commands. Open up a browser and go to localhost 3000. You will see the project running
 
 ## Contributions
 
